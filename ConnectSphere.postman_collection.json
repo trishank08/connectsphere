@@ -1,0 +1,194 @@
+{
+  "info": {
+    "name": "ConnectSphere API",
+    "description": "REST API collection for the ConnectSphere social networking platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080/api" },
+    { "key": "accessToken", "value": "" },
+    { "key": "refreshToken", "value": "" },
+    { "key": "userId", "value": "1" },
+    { "key": "postId", "value": "1" }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [{ "key": "token", "value": "{{accessToken}}", "type": "string" }]
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/register",
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"johndoe\",\n  \"fullName\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"Password1\"\n}" }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login",
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"Password1\"\n}" }
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/refresh",
+            "body": { "mode": "raw", "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}" }
+          }
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/change-password",
+            "body": { "mode": "raw", "raw": "{\n  \"currentPassword\": \"Password1\",\n  \"newPassword\": \"NewPassword1\"\n}" }
+          }
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/forgot-password",
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"john@example.com\"\n}" }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/logout",
+            "body": { "mode": "raw", "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        { "name": "Get My Profile", "request": { "method": "GET", "url": "{{baseUrl}}/users/me" } },
+        { "name": "Get User Profile", "request": { "method": "GET", "url": "{{baseUrl}}/users/{{userId}}" } },
+        {
+          "name": "Update My Profile",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/users/me",
+            "body": { "mode": "raw", "raw": "{\n  \"fullName\": \"John Doe\",\n  \"bio\": \"Building things.\",\n  \"location\": \"San Francisco\",\n  \"skills\": [\"Java\", \"React\"],\n  \"interests\": [\"Music\", \"Hiking\"]\n}" }
+          }
+        },
+        { "name": "Search Users", "request": { "method": "GET", "url": "{{baseUrl}}/users/search?query=john&page=0&size=20" } },
+        { "name": "Suggested Users", "request": { "method": "GET", "url": "{{baseUrl}}/users/suggested?limit=10" } }
+      ]
+    },
+    {
+      "name": "Friends",
+      "item": [
+        { "name": "Send Friend Request", "request": { "method": "POST", "url": "{{baseUrl}}/friends/requests/{{userId}}" } },
+        { "name": "Accept Request", "request": { "method": "PUT", "url": "{{baseUrl}}/friends/requests/1/accept" } },
+        { "name": "Reject Request", "request": { "method": "PUT", "url": "{{baseUrl}}/friends/requests/1/reject" } },
+        { "name": "Cancel Request", "request": { "method": "DELETE", "url": "{{baseUrl}}/friends/requests/1" } },
+        { "name": "Remove Friend", "request": { "method": "DELETE", "url": "{{baseUrl}}/friends/{{userId}}" } },
+        { "name": "Pending Requests", "request": { "method": "GET", "url": "{{baseUrl}}/friends/requests/pending" } },
+        { "name": "Sent Requests", "request": { "method": "GET", "url": "{{baseUrl}}/friends/requests/sent" } },
+        { "name": "My Friends", "request": { "method": "GET", "url": "{{baseUrl}}/friends" } },
+        { "name": "Mutual Friends", "request": { "method": "GET", "url": "{{baseUrl}}/friends/mutual/{{userId}}" } }
+      ]
+    },
+    {
+      "name": "Posts",
+      "item": [
+        {
+          "name": "Create Post",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/posts",
+            "body": { "mode": "raw", "raw": "{\n  \"content\": \"Hello ConnectSphere!\",\n  \"imageUrl\": null,\n  \"sharedPostId\": null\n}" }
+          }
+        },
+        {
+          "name": "Update Post",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/posts/{{postId}}",
+            "body": { "mode": "raw", "raw": "{\n  \"content\": \"Edited content\",\n  \"imageUrl\": null\n}" }
+          }
+        },
+        { "name": "Delete Post", "request": { "method": "DELETE", "url": "{{baseUrl}}/posts/{{postId}}" } },
+        { "name": "Get Post", "request": { "method": "GET", "url": "{{baseUrl}}/posts/{{postId}}" } },
+        { "name": "Feed", "request": { "method": "GET", "url": "{{baseUrl}}/posts/feed?page=0&size=10" } },
+        { "name": "User Timeline", "request": { "method": "GET", "url": "{{baseUrl}}/posts/user/{{userId}}?page=0&size=10" } },
+        { "name": "Like Post", "request": { "method": "POST", "url": "{{baseUrl}}/posts/{{postId}}/like" } },
+        { "name": "Unlike Post", "request": { "method": "DELETE", "url": "{{baseUrl}}/posts/{{postId}}/like" } },
+        { "name": "Share Post", "request": { "method": "POST", "url": "{{baseUrl}}/posts/{{postId}}/share?comment=Great read!" } }
+      ]
+    },
+    {
+      "name": "Comments",
+      "item": [
+        {
+          "name": "Add Comment",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/posts/{{postId}}/comments",
+            "body": { "mode": "raw", "raw": "{\n  \"content\": \"Great post!\",\n  \"parentCommentId\": null\n}" }
+          }
+        },
+        { "name": "Delete Comment", "request": { "method": "DELETE", "url": "{{baseUrl}}/posts/{{postId}}/comments/1" } },
+        { "name": "List Comments", "request": { "method": "GET", "url": "{{baseUrl}}/posts/{{postId}}/comments" } }
+      ]
+    },
+    {
+      "name": "Messages",
+      "item": [
+        {
+          "name": "Send Message",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/messages",
+            "body": { "mode": "raw", "raw": "{\n  \"receiverId\": {{userId}},\n  \"content\": \"Hey there!\"\n}" }
+          }
+        },
+        { "name": "Conversation History", "request": { "method": "GET", "url": "{{baseUrl}}/messages/conversation/{{userId}}?page=0&size=30" } },
+        { "name": "Mark Conversation Read", "request": { "method": "PUT", "url": "{{baseUrl}}/messages/conversation/{{userId}}/read" } },
+        { "name": "Unread Count", "request": { "method": "GET", "url": "{{baseUrl}}/messages/unread-count" } }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        { "name": "List Notifications", "request": { "method": "GET", "url": "{{baseUrl}}/notifications?page=0&size=20" } },
+        { "name": "Mark One Read", "request": { "method": "PUT", "url": "{{baseUrl}}/notifications/1/read" } },
+        { "name": "Mark All Read", "request": { "method": "PUT", "url": "{{baseUrl}}/notifications/read-all" } },
+        { "name": "Unread Count", "request": { "method": "GET", "url": "{{baseUrl}}/notifications/unread-count" } }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        { "name": "All Users", "request": { "method": "GET", "url": "{{baseUrl}}/admin/users?page=0&size=20" } },
+        { "name": "Disable User", "request": { "method": "PUT", "url": "{{baseUrl}}/admin/users/{{userId}}/disable" } },
+        { "name": "Enable User", "request": { "method": "PUT", "url": "{{baseUrl}}/admin/users/{{userId}}/enable" } },
+        { "name": "Delete User", "request": { "method": "DELETE", "url": "{{baseUrl}}/admin/users/{{userId}}" } },
+        { "name": "Delete Post", "request": { "method": "DELETE", "url": "{{baseUrl}}/admin/posts/{{postId}}" } },
+        { "name": "Dashboard Stats", "request": { "method": "GET", "url": "{{baseUrl}}/admin/dashboard" } }
+      ]
+    }
+  ]
+}
