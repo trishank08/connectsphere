@@ -18,7 +18,7 @@ export function SocketProvider({ children }) {
     if (!user || !token) return
 
     const client = new Client({
-      webSocketFactory: () => new SockJS('/ws'),
+      webSocketFactory: () => new SockJS(import.meta.env.VITE_WS_URL || '/ws'),
       connectHeaders: { Authorization: `Bearer ${token}` },
       reconnectDelay: 4000,
       onConnect: () => {
