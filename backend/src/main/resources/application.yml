@@ -3,6 +3,8 @@ server:
   servlet:
     context-path: /
 
+main:
+  lazy-initialization: true
 spring:
   application:
     name: connectsphere-backend
