@@ -51,14 +51,14 @@ The project was built as a clean, understandable MERN-style application: a polis
 
 ### Desktop feed
 
-<img src="./docs/images/connectsphere-desktop-feed.png" alt="connectSphere desktop feed with posts, profile navigation, search and suggested people" width="100%" />
+<img src="blob:https://chatgpt.com/6f49e2fb-6fe1-4fc6-97fc-b95f91cf5b05" alt="connectSphere desktop feed with posts, profile navigation, search and suggested people" width="100%" />
 
 ### Responsive mobile experience
 
 <p align="center">
-  <img src="./docs/images/connectsphere-mobile-feed.png" alt="connectSphere mobile home feed" width="36%" />
+  <img src="blob:https://chatgpt.com/c00bbdd9-9718-49aa-a20b-54dfab280743" alt="connectSphere mobile home feed" width="36%" />
   &nbsp;&nbsp;
-  <img src="./docs/images/connectsphere-mobile-inbox.png" alt="connectSphere mobile message inbox" width="30%" />
+  <img src="blob:https://chatgpt.com/25023031-6d87-4895-bfd3-ce02891544a7" alt="connectSphere mobile message inbox" width="30%" />
 </p>
 
 The UI adapts from a three-column desktop layout to a compact mobile experience with search, notifications, inbox badges, profile access, and logout always within reach.
